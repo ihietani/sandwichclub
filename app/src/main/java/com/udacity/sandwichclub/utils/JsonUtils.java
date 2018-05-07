@@ -14,19 +14,27 @@ import java.util.List;
 public class JsonUtils {
 
     public static final String TAG = "JsonUtils.class";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_MAIN_NAME = "mainName";
+    public static final String KEY_ALSO_KNOWN_AS = "alsoKnownAs";
+    public static final String KEY_PLACE_OF_ORIGIN = "placeOfOrigin";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_INGREDIENTS = "ingredients";
+
     public static Sandwich parseSandwichJson(String json) {
 
         Sandwich sandwich = new Sandwich();
 
         try{
             JSONObject object = new JSONObject(json);
-            JSONObject name = object.getJSONObject("name");
-            sandwich.setMainName(name.getString("mainName"));
-            sandwich.setAlsoKnownAs(parseArray(name.getJSONArray("alsoKnownAs")));
-            sandwich.setPlaceOfOrigin(object.getString("placeOfOrigin"));
-            sandwich.setDescription(object.getString("description"));
-            sandwich.setImage(object.getString("image"));
-            sandwich.setIngredients(parseArray(object.getJSONArray("ingredients")));
+            JSONObject name = object.getJSONObject(KEY_NAME);
+            sandwich.setMainName(name.getString(KEY_MAIN_NAME));
+            sandwich.setAlsoKnownAs(parseArray(name.getJSONArray(KEY_ALSO_KNOWN_AS)));
+            sandwich.setPlaceOfOrigin(object.getString(KEY_PLACE_OF_ORIGIN));
+            sandwich.setDescription(object.getString(KEY_DESCRIPTION));
+            sandwich.setImage(object.getString(KEY_IMAGE));
+            sandwich.setIngredients(parseArray(object.getJSONArray(KEY_INGREDIENTS)));
             Log.d(TAG,  sandwich.getImage());
 
         }catch (JSONException jsone){
